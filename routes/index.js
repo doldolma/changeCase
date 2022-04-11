@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
 
   const string = req.body
   console.log(string);
-  const result = splitString(string);
+  const result = splitString(string.trim());
   return res.send(result);
 });
 
@@ -21,14 +21,14 @@ router.post("/", async (req, res) => {
 router.post("/to_camel", (req, res) => {
   const string = req.body.string;
   return res.json({
-    string: _.camelCase(string)
+    string: _.camelCase(string.trim())
   })
 });
 
 router.post("/to_snake", (req, res) => {
   const string = req.body.string;
   return res.json({
-    string: _.snakeCase(string)
+    string: _.snakeCase(string.trim())
   })
 });
 
