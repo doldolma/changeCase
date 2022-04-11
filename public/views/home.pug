@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title 문자열 변환
+        link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+    body
+        center
+            br
+            label 카멜케이스로
+                textarea(rows="5", cols="30")
+                button(name="to_camel") 변환
+            br
+            label 스네이크케이스로
+                textarea(rows="5", cols="30")
+                button(name="to_snake") 변환
+        script.
+            window.onload = () => {
+              const buttons = document.getElementsByTagName("button");
+              for(let i=0; i<buttons.length; i++) {
+                  buttons[i].addEventListener("click", (e) => {
+                      const button = e.target;
+                      const type = button.getAttribute("name");
+                      const string = button.previousSibling.value;
+                      fetch("/string/"+type, {
+                          method: "POST",
+                          headers: {"Content-type": "application/json"},
+                          body: JSON.stringify({ string })
+                      }).then(res=>res.json()).then(res => {
+                          console.log(res);
+                          button.previousSibling.value = res.string;
+                      });
+                  });
+              }
+            };
