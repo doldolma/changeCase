@@ -9,24 +9,27 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post("/", async (req, res) => {
+router.post("/to_gorm", async (req, res) => {
 
-  const string = req.body
+  const string = req.body;
   console.log(string);
-  const result = splitString(string.trim());
-  return res.send(result);
+  return res.json({
+    string: splitString(string.trim())
+  })
 });
 
 
 router.post("/to_camel", (req, res) => {
-  const string = req.body.string;
+  const string = req.body;
+  console.log(string);
   return res.json({
     string: _.camelCase(string.trim())
   })
 });
 
 router.post("/to_snake", (req, res) => {
-  const string = req.body.string;
+  const string = req.body;
+  console.log(string);
   return res.json({
     string: _.snakeCase(string.trim())
   })
@@ -40,7 +43,8 @@ const typeCasting = {
   float: "float32",
   varchar: "string",
   datetime: "time.Time",
-  date: "time.Time"
+  date: "time.Time",
+  smallint: "int"
 }
 
 

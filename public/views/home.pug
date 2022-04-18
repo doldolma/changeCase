@@ -15,6 +15,10 @@ html(lang="en")
             label 스네이크케이스로
                 textarea(rows="5", cols="30")
                 button(name="to_snake") 변환
+            br
+            label DDL -> Golang 구조체
+                textarea(rows="10", cols="50")
+                button(name="to_gorm") 변환
         script.
             window.onload = () => {
               const buttons = document.getElementsByTagName("button");
@@ -25,8 +29,8 @@ html(lang="en")
                       const string = button.previousSibling.value;
                       fetch("/string/"+type, {
                           method: "POST",
-                          headers: {"Content-type": "application/json"},
-                          body: JSON.stringify({ string })
+                          headers: {"Content-type": "text/plain"},
+                          body: string
                       }).then(res=>res.json()).then(res => {
                           console.log(res);
                           button.previousSibling.value = res.string;
