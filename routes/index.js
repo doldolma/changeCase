@@ -49,6 +49,7 @@ const typeCasting = {
   int: "int",
   char: "string",
   float: "float32",
+  double: "float64",
   varchar: "string",
   datetime: "time.Time",
   date: "time.Time",
