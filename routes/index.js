@@ -13,9 +13,17 @@ router.post("/to_gorm", async (req, res) => {
 
   const string = req.body;
   console.log(string);
-  return res.json({
-    string: splitString(string.trim())
-  })
+
+  try {
+    return res.json({
+      string: splitString(string.trim())
+    })
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({
+      message: "파싱실패",
+    })
+  }
 });
 
 

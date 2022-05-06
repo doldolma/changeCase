@@ -9,19 +9,26 @@ html(lang="en")
         center
             br
             label 카멜케이스로
-                textarea(rows="5", cols="30")
-                button(name="to_camel") 변환
+                textarea(rows="2", cols="30")
+                button(name="to_camel" class="to_string") 변환
             br
             label 스네이크케이스로
-                textarea(rows="5", cols="30")
-                button(name="to_snake") 변환
+                textarea(rows="2", cols="30")
+                button(name="to_snake" class="to_string") 변환
+            br
+            label JWT 생성
+                p 서명 비밀키
+                    input(type="text")
+                p Claims (JSON 형식만!)
+                    textarea(rows="20", cols="30")
+                button(name="to_jwt") JWT 생성
             br
             label DDL -> Golang 구조체
                 textarea(rows="10", cols="50")
-                button(name="to_gorm") 변환
+                button(name="to_gorm" class="to_string") 변환
         script.
             window.onload = () => {
-              const buttons = document.getElementsByTagName("button");
+              const buttons = document.getElementsByClassName("to_string");
               for(let i=0; i<buttons.length; i++) {
                   buttons[i].addEventListener("click", (e) => {
                       const button = e.target;
