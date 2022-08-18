@@ -62,7 +62,16 @@ function splitString(string) {
   const result = [];
   const rows = string.split("\n").filter(a => a);
   rows.forEach(row => {
+    // 컬럼에 대한 설명이 있는지 체크
+    let comment = row.match("comment \'\.*\'");
+    if (comment) {
+      // 컬럼에 대한 설명이 있음 컬럼 위에 주석 추가
+      result.push("// " + comment[0].replaceAll("comment", "").replaceAll("'", "").trim());
+    }
+
+
     row = row.split(" ").filter(a => a);
+
     let column = "";
 
     // 첫번쨰는 이름
@@ -90,9 +99,11 @@ function splitString(string) {
       options += ' not null;';
     }
 
-    options += '" json:"' + _.camelCase(row[0]) + '"\`';
+    options += '" json:"' + _.camelCase(row[0]) + '"';
 
     column += options;
+
+    column += ' example:""\`'
 
     result.push(column);
   });
