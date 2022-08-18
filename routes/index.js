@@ -53,6 +53,8 @@ const typeCasting = {
   varchar: "string",
   datetime: "time.Time",
   date: "time.Time",
+  timestamp: "time.Time",
+  decial: "float64",
   smallint: "int",
   bigint: "int",
 }
